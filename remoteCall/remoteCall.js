@@ -40,7 +40,7 @@ module.exports = {
         if (!clients[host][port]) {
             clients[host][port] = (function() {
                 return function(nfName) {
-                    var data = null;
+                    var data = '[]';
                     var not_called = true;
                     var makeCall = function (callback) {
                         if (not_called) {
@@ -56,8 +56,7 @@ module.exports = {
                                     callback(JSON.parse(data));
                                 }
                             }));
-
-                            req.write(JSON.stringify(data));
+                            req.write(data);
                             req.end();
                         }
                     }
@@ -69,7 +68,7 @@ module.exports = {
                     }, 1);
 
                     return function() {
-                        data = Array.prototype.slice.call(arguments);
+                        data = JSON.stringify(Array.prototype.slice.call(arguments));
                         return makeCall;
                     }
                 }
@@ -119,7 +118,9 @@ module.exports = {
                         });
                     });
 
-                    server.listen(port, host, function() { console.log('Server started'); });
+                    server.listen(port, host, function() { 
+                        // console.log('Server started'); 
+                    });
 
                     return function(fn) {
                         var fnName = fn.toString().substr('function '.length);

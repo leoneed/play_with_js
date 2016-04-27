@@ -1,10 +1,10 @@
+'use strict'
 var http = require('http');
 
 const default_host = 'localhost';
 const default_port = 8080;
 
 var servers = {};
-'use strict'
 
 var clients = {};
 var fnsToCall = {};

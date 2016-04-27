@@ -24,3 +24,18 @@ Call function
 caller('FunctionName')(some, arguments, here)(callbackFunction);
 //callback function will get return from called function as first argument
 ```
+
+Callback is not required
+```javascript
+fnCall('CallMeToo')('hi', 11)();
+```
+
+Not necessary to make last call
+```javascript
+fnCall('CallMeToo')('hi', 11);
+```
+
+Call for arguments is not necessary too
+```javascript
+fnCall('CallMeToo');
+```

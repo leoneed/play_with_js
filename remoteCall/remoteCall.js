@@ -40,9 +40,12 @@ module.exports = {
         if (!clients[host][port]) {
             clients[host][port] = (function() {
                 return function(nfName) {
-                    return function() {
-                        var data = Array.prototype.slice.call(arguments);
-                        return function (callback) {
+                    var data = null;
+                    var not_called = true;
+                    var makeCall = function (callback) {
+                        if (not_called) {
+                            not_called = false;
+
                             var req = http.request({
                                 host: host,
                                 port: port,
@@ -57,6 +60,17 @@ module.exports = {
                             req.write(JSON.stringify(data));
                             req.end();
                         }
+                    }
+
+                    setTimeout(function() {
+                        if (not_called) {
+                            makeCall();
+                        }
+                    }, 1);
+
+                    return function() {
+                        data = Array.prototype.slice.call(arguments);
+                        return makeCall;
                     }
                 }
             })();

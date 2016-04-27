@@ -12,3 +12,9 @@ fnCall('CallMeToo')('hi', 11)(function(result) {
 
 
 fnCall('CallMeToo')('hi', 11)();
+
+fnCall('CallMeToo')('hi', 11);
+
+fnCall('CallMeToo')();
+
+fnCall('CallMeToo');

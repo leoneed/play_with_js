@@ -9,3 +9,6 @@ fnCall('CallMe')('test', 'hello', 5)(function(result) {
 fnCall('CallMeToo')('hi', 11)(function(result) {
     console.log(result);
 });
+
+
+fnCall('CallMeToo')('hi', 11)();

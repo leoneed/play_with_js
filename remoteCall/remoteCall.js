@@ -49,7 +49,9 @@ module.exports = {
                                 method: 'POST',
                                 path: '/'+nfName
                             }, listenServerHandler(function(data) {
-                                callback(JSON.parse(data));
+                                if (callback && typeof callback === 'function') {
+                                    callback(JSON.parse(data));
+                                }
                             }));
 
                             req.write(JSON.stringify(data));
